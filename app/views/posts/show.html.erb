@@ -1,6 +1,19 @@
-<h1><%= @post.title %></h1><br>
-<h2>by <%= @post.author %></h2><br>
-<p><%= @post.body %></p>
+<div class="page_container">
+  <div class="flex_container">
+    <div class="post_container">
+      <h1><%= @post.title %></h1><br>
+      <h2>by <%= @post.user.name %></h2><br>
+      <p><%= @post.body %></p>
+    </div>
 
-<%= link_to "Edit", edit_post_path %>
-<%= link_to "Back", root_path %>
+
+
+    <nav class="bottom_links">
+      <% if current_user.id == @post.user.id %>
+        <%= link_to "Edit", edit_post_path %>
+        <%= link_to "Delete post", @post, method: :delete, data: { confirm: "Are you suuuuure?" } %>
+      <% end %>
+      <%= link_to "Back", root_path %>
+    </nav>
+  </div>
+</div>

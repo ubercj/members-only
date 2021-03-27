@@ -11,8 +11,54 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if flash[:alert] %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+
+    <nav class="navbar">
+      <div class="wordmark">
+        <%= link_to root_path do %>
+          <h1 id="page_title">Sekrit Clubhouse</h1>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <p class="disclaimer">
+          You are logged in, so you can see all the sekrit names :)
+        </p>
+        <div class="button_container">
+          <div class="button">
+            <p class="logins">
+              <%= link_to current_user.username, edit_user_registration_path %>
+            </p>
+          </div>
+          <div class="button">
+            <p class="logins">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </p>
+          </div>
+        </div>
+      <% else %>
+        <p class="disclaimer">
+          Log in or create an account to see the REDACTED names!
+        </p>
+        <div class="button_container">
+          <div class="button">
+            <p class="logins">
+              <%= link_to "Sign in", new_user_session_path %>
+            </p>
+          </div>
+          <div class="button">
+            <p class="logins">
+              <%= link_to "Sign up", new_user_registration_path %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </nav>
 
     <%= yield %>
   </body>

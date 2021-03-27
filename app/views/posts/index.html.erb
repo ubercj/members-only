@@ -1,14 +1,28 @@
-<p class="notice"><%= notice %></p>
+<div class="page_container">
+  <div class="flex_container">
+    <h2 id="feed_title">Sekrit Posts</h2>
 
-<h1>Sekrit Posts</h1>
-
-<% @posts.each do |post| %>
-  <div class="post_container">
-    <h5>"<%= post.title %>" by <%= post.author %></h5>
-    <p><%= post.body %></p>
-    <%= link_to "See post", post %>
-    <%= link_to "Delete post", post, method: :delete, data: { confirm: "Are you suuuuure?" } %>
+    <% @posts.each do |post| %>
+      <div class="post_container">
+        <h3>"<%= post.title %>" by 
+          <% if user_signed_in? %>
+            <%= post.user.name %>
+          <% else %>
+            REDACTED
+          <% end %>
+        </h3>
+        <p><%= post.body %></p>
+        <% if user_signed_in? %>
+          <%= link_to "See post", post %>
+          <% if current_user.id == post.user.id %>
+            <%= link_to "Delete post", post, method: :delete, data: { confirm: "Are you suuuuure?" } %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <br>
+    <nav class="bottom_links">
+      <%= link_to "Make a post", new_post_path %>
+    </nav>
   </div>
-<% end %>
-<br>
-<%= link_to "Make a post", new_post_path %>
+</div>
