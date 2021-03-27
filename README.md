@@ -1,24 +1,3 @@
-# README
+This is the Authentication project for The Odin Project.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The assignment is to create a basic site with Devise that allows users to make posts. It is requried that the authors of the posts are only visible when logged in.
